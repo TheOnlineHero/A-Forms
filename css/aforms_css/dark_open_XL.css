@@ -1,0 +1,180 @@
+.a-form { 
+	margin:10px 0 0 0; 
+	width: 450px; 
+}
+
+.a-form fieldset	{ 
+	margin-top:10px; 
+	padding:5px 0 0 0; 
+	border:none;
+	background:none; 
+}
+
+.a-form legend { 
+	border-bottom:1px solid #BAC4D8;
+	color:#BAC4D8;
+	font:normal 1.6em "Lucida Grande","Lucida Sans Unicode",geneva,verdana,sans-serif;;
+	line-height:1em;
+	padding:0pt 0pt 0.3em;
+	text-transform:uppercase;
+	margin:0;
+}
+
+
+/*                                                    */
+/* global definitions for field labels                */
+/*                                                    */
+.a-form label {
+	font:normal 1.1em Verdana;	
+	line-height:1.3em;
+	color:#FFFFFF;
+	display:block;
+	margin:12px 0pt 2px;
+	text-align:left;
+	width:70%;
+}
+
+/*                                                    */
+/*   FORM FIELDS general formatting                   */
+/*                                                    */
+
+.a-form input,
+.a-form textarea,
+.a-form select { 
+	padding:6px 3px;
+	background: #D1CCC8; 
+	border:1px solid #1C212D;
+	border-top: 1px solid #aaaaaa; 
+	color:#10141B;
+	font:normal 1.1em Verdana;	
+}
+.a-form input:hover,
+.a-form textarea:hover,
+.a-form select:hover	{
+	background:#FFFFFF; 
+}
+
+.a-form input:focus,
+.a-form textarea:focus,
+.a-form select:focus	{ 
+	background:#F3F8F8; 
+}
+
+.a-form textarea,
+.a-form input {
+	width:270px; 
+}
+.a-form select {
+	width:278px; /* attempt to have equal length */
+}  
+
+.a-form textarea {
+	height: 6em;
+	overflow:auto;
+}
+
+/*                                                    */
+/*   FORM submit button                               */
+/*                                                    */
+.a-form input.prev,
+.a-form input.next,
+.a-form input.send	{
+	background:#191D28 url(../images/dark_open_XL_submit.jpg) repeat-x left bottom; 
+	border:1px solid #333D51;
+	color:#A0ABBF;
+	font-size:14px;
+	margin:5px 5px 0 0;
+	text-align:center;
+	text-transform:uppercase;
+	width:140px;
+	padding:2px;	 
+}
+.a-form input.next {
+	width: auto;
+}
+.a-form input.prev {
+	width: auto;
+}
+
+/*                                                    */
+/*   FORM FIELDS enhanced error display               */
+/*                                                    */
+span.error {
+	background:#FFDFDF url(li-err-bg-dark.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+	padding:5px 0!important;
+	margin:5px 0!important;
+}
+
+/*                                                    */
+/*   formatting for invalid user inputs               */
+/*                                                    */
+
+.a-form .cf_error {
+	color:#ad2929;
+	border:5px solid #BAC4D8;
+	padding:3px;
+	width:262px;
+}
+
+/*                                                    */
+/* change formatting of response msgs here            */
+/*                                                    */
+
+div.success {
+	background:#333333 none repeat scroll 0%;
+	color:#BAC4D8;
+	display:block;
+}
+div.error {
+	display:block;
+	background:#FFDFDF url(li-err-bg-dark.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+}
+div.waiting {
+	background:#F9F9F9;
+	color:#AAAAAA;
+	display:block;
+}
+/*                                                    */
+/* disabled fields [disabled] does not work on IE!    */
+/*                                                    */
+
+[disabled] {
+	color:#dddddd;
+	border-color:#dddddd!important;
+	background:none!important;
+}
+.disabled {
+	border-color:#dddddd!important;
+}
+
+/*                                                    */
+/*  Other: browser hacks                              */
+/*                                                    */
+* html .a-form legend { 
+	position:absolute; 
+	top: -10px; 
+	left: -7px; 
+	margin-left:0;
+}
+* html .a-form fieldset {
+	position: relative;
+	margin-top:15px;
+	padding-top:25px; 
+}
+*+html .a-form legend { 
+	position:absolute; 
+	top: -10px; 
+	left: -7px; 
+	margin-left:0;
+}
+*+html .a-form fieldset {
+	position: relative;
+	margin-top:15px;
+	padding-top:25px; 
+}

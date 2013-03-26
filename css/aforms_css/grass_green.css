@@ -1,0 +1,176 @@
+/*                                                    */
+/*  main 'top-level' form elements                    */
+/*                                                    */
+.a-form { 
+	margin:10px auto 0 auto; 
+	width: 410px; 
+}
+
+.a-form fieldset	{ 
+	margin:0px; 
+	padding:0px; 
+	border:none;
+	background:#CAE4A7;
+}
+
+.a-form legend { 
+	display:none; 
+}
+
+/*                                                    */
+/* global definitions for field labels                */
+/*                                                    */
+
+.a-form label {
+	color:white;
+	width:110px; 
+	margin:6px 10px 0 0; 
+	display:-moz-inline-box; /*for mozilla*/
+	display:inline-block; /*for Opera & IE*/
+	text-align:left;
+	vertical-align:top;
+}
+.a-form label span {
+	color:white;
+	width:100px; /* must be the same as above!*/
+	margin-left:10px; 
+	display:block;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+/*                                                    */
+/*   FORM FIELDS general formatting                   */
+/*                                                    */
+
+.a-form input,
+.a-form textarea,
+.a-form select {
+	color:#BFD062;
+	font-size:1.2em;
+	font-weight:bold;
+	padding:6px 4px 2px;
+	background: white;
+	border:0;
+	height:21px;
+	vertical-align:top;
+}
+.a-form input:hover,
+.a-form textarea:hover,
+.a-form select:hover	{
+	color:white;
+	background:#B0D77D; 
+}
+
+.a-form input:focus,
+.a-form textarea:focus,
+.a-form select:focus	{ 
+	color:#BFD062!important;
+	background:white; 
+}
+
+.a-form textarea,
+.a-form input {
+	width:245px; 
+}
+.a-form select {
+	height:27px;		
+	width:250px; /* attempt to have equal length */
+}  
+
+.a-form textarea {
+	font-family: arial;
+	font-size: 0.9em;
+	height:7em;
+	overflow:auto;
+}
+
+/*                                                    */
+/*   FORM submit button                               */
+/*                                                    */
+.a-form input.prev,
+.a-form input.next,
+.a-form input.send	{ 
+	color:#BFD062;
+	border:0; 
+	height:25px; 
+	width:auto;
+	font-size:1.2em;
+	font-weight:bold;
+	background: white;
+	margin:5px 0px 20px 0;
+	padding:0 1em;
+}
+.a-form input.next {
+}
+.a-form input.prev {
+}
+
+
+/*                                                    */
+/*   FORM FIELDS enhanced error display               */
+/*                                                    */
+span.error {
+	background:#FFDFDF url(li-err-bg-green.png) repeat!important;
+	border-color:0px solid #DF7D7D;
+	padding:5px 0!important;
+	margin:5px 0!important;
+}
+
+/*                                                    */
+/* change formatting of response msgs here            */
+/*                                                    */
+
+div.success {
+	background:#EDF5E2 none repeat scroll 0% 50%;
+	color:#6D9834;
+	display:block;
+}
+div.error {
+	display:block;
+	background:#FFDFDF url(li-err-bg-green.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+}
+div.waiting {
+	background:#F9F9F9;
+	color:#AAAAAA;
+	display:block;
+}
+/*                                                    */
+/*   formatting for invalid user inputs               */
+/*                                                    */
+
+.a-form .error { 
+	color:#ad2929; 
+	border:1px solid #ad2929; 
+}
+
+/*                                                    */
+/* disabled fields [disabled] does not work on IE!    */
+/*                                                    */
+
+[disabled] {
+	color:#dddddd;
+	border-color:#dddddd!important;
+	background:none!important;
+}
+.disabled {
+	border-color:#dddddd!important;
+}
+
+/*                                                    */
+/*  Other: browser hacks                              */
+/*                                                    */
+
+* html .a-form legend { 
+	position:absolute; 
+	top: -10px; 
+	left: 10px; 
+	margin-left:0;
+}
+* html .a-form fieldset {
+	position: relative;
+	padding-top:25px; 
+}

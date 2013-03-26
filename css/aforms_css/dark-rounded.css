@@ -1,0 +1,158 @@
+/*                                                     */
+/*  PLEASE NOTE:                                       */
+/*  -----------                                        */
+/*  if you have multiple fieldsets, you need to edit   */
+/*  line 47 (search for "multiple fieldsets") &        */
+/*  add a new "TEXT-ONLY" field BEFORE EACH            */
+/*  'NEW FIELDSET' element!!                           */
+/*   field name:  |fieldsetclose                       */
+/*                                                     */
+
+/*                                                    */
+/*  main 'top-level' form elements                    */
+/*                                                    */
+.a-form { 
+	width: 410px; 
+	padding-bottom:8px;
+	margin:10px auto 0 auto;
+	background: url(../images/customform_dark_bg_bottom.jpg) no-repeat bottom left;
+}
+
+.a-form fieldset	{ 
+	margin:10px 0 0 0; 
+	padding:11px 0 0 0; 
+	border:none;
+	background: url(../images/customform_dark_bg_top.jpg) no-repeat top left;
+	}
+
+.a-form legend { 
+	display:none;
+}
+
+/*                                                    */
+/* global definitions for field labels                */
+/*                                                    */
+
+.a-form label {
+	color: white;
+	width:90px; 
+	margin:4px 10px 0 0; 
+	display:-moz-inline-box; /*for mozilla*/
+	display:inline-block; /*for Opera & IE*/
+	text-align:right;
+	vertical-align:top;
+}
+.a-form label span {
+	width:90px; /* must be the same as above!*/
+	display:block;
+}
+
+/*                                                    */
+/*   FORM FIELDS general formatting                   */
+/*                                                    */
+
+.a-form input,
+.a-form textarea,
+.a-form select { 
+	padding:3px;
+	background: #f9f9f9; 
+	border: 1px solid #888888;
+	vertical-align:top;
+}
+.a-form input:hover,
+.a-form textarea:hover,
+.a-form select:hover	{
+	background:#CEDDDF; 
+}
+
+.a-form input:focus,
+.a-form textarea:focus,
+.a-form select:focus	{ 
+	background:#F3F8F8; 
+}
+
+.a-form textarea,
+.a-form input {
+	width:150px; 
+}
+.a-form select {
+	width:158px; /* attempt to have equal length */
+}  
+
+.a-form textarea {
+	font-family: arial;
+	font-size: 0.9em;
+	overflow:auto;
+}
+
+/*                                                    */
+/*   FORM submit button                               */
+/*                                                    */
+
+.a-form input.prev,
+.a-form input.next,
+.a-form input.send	{ 
+	width:105px; 
+	height:26px; 
+	padding:0; 
+	margin:0 8px 0 0;
+	border:none!important;
+	background:url(../images/customform_dark_submit.jpg) no-repeat; 
+}
+.a-form input.next {
+	background:url(../images/customform_dark_reset.jpg) no-repeat; 
+}
+.a-form input.prev {
+	background:url(../images/customform_dark_back.jpg) no-repeat; 
+}
+
+/*                                                    */
+/*   FORM FIELDS enhanced error display               */
+/*                                                    */
+span.error {
+	background:#FFDFDF url(li-err-bg-dark.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:0;
+	padding:5px 0!important;
+	margin:3px 1px 0!important;
+}
+
+/*                                                    */
+/* change formatting of response msgs here            */
+/*                                                    */
+
+div.success {
+	background:black none repeat scroll 0%;
+	color:white;
+	display:block;
+}
+div.failure {
+	display:block;
+	background:#FFDFDF url(li-err-bg-dark.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+}
+div.waiting {
+	background:#F9F9F9;
+	color:#AAAAAA;
+	display:block;
+}
+/*                                                    */
+/*   formatting for invalid user inputs               */
+/*                                                    */
+
+.a-form span.error {
+	color:#ad2929;
+	border:2px solid #ad2929;
+}
+
+[disabled] {
+	color:#dddddd;
+	border-color:#dddddd!important;
+	background:none!important;
+}
+.disabled {
+	border-color:#dddddd!important;
+}

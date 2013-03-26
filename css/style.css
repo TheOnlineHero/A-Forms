@@ -1,0 +1,133 @@
+td.shiftable, li.shiftable {
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+li.shiftable {
+	float: left;
+	width: 1200px;
+}
+
+li.shiftable, table tr.shiftable td {
+	cursor: move;
+}
+
+li.shiftable span, li.shiftable ul, li.shiftable div.value-option-controls, li.shiftable div.file-ext-controls {
+	display: block;
+	float: left;
+}
+
+li.shiftable span.colon {
+	float: none;
+	display: inline;
+	margin: 0 5px;
+}
+
+li.shiftable div.value-option-controls, li.shiftable div.file-ext-controls {
+	display: none;
+	width: 370px;
+	margin-bottom: 40px;
+}
+
+li.shiftable div.value-option-controls strong {
+	float: left;
+	display: block;
+	width: 135px;
+	margin-left: 3px;
+}
+li.shiftable div.value-option-controls strong.label {
+	margin-right: 11px;
+}
+
+li.shiftable div.value-option-controls ul {
+	float: none;
+}
+
+li.shiftable, .actions {
+	clear: both;
+}
+
+li.shiftable.odd, table tbody tr.odd td {
+	background: #cac9c9;
+}
+li.shiftable.even, table tbody tr.even td {
+	background: #dfdfdf;
+}
+
+li.shiftable ul {
+	margin-right: 20px;
+}
+
+li.shiftable .delete {
+	float: right;
+	display: block;
+	margin: 5px;
+}
+
+#fields_sortable li input, #fields_sortable li select {
+	margin-right: 10px;
+}
+#fields_sortable .value-option-controls li input, #fields_sortable .value-option-controls li select {
+	margin-right: 0;
+}
+#fields_sortable .value-option-controls li input, #fields_sortable .value-option-controls li select, #fields_sortable .value-option-controls li input {
+	display: inline;
+}
+
+#fields_row_clone, #fields_row_clone * {
+	display: none;
+}
+
+form label {
+	float: left;
+	width: 130px;
+	margin-right: 10px;
+}
+
+form p {
+	clear: both;
+}
+
+form span.error {
+	color: #ff0000;
+	display: block;
+	margin-left: 142px;
+}
+
+form li.shiftable span.error {
+	float: none;
+}
+
+form #css_content {
+	width: 900px;
+	height: 700px;
+}
+
+form ul.options input {
+	float: left;
+	margin-right: 5px;
+}
+
+form ul.options {
+	padding-bottom: 30px;
+}
+
+form ul.options label {
+	width: auto;
+}
+
+form input.text, form textarea {
+	width: 210px;
+}
+
+form textarea {
+	height: 200px;
+}
+
+.pagination, .pagination li {
+	display: inline;
+}
+
+table {
+	margin: 20px 0;
+}

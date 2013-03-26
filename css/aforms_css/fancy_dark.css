@@ -1,0 +1,196 @@
+.a-form { 
+	margin:10px auto 0 auto; 
+	width: 410px; 
+}
+
+.a-form fieldset	{ 
+	margin-top:10px; 
+	padding:5px 0 15px 0; 
+	border:none; 
+	background:none;
+}
+
+.a-form legend { 
+	margin-left:10px;
+	padding: 0 2px; 
+	font:normal 20px Verdana;
+	color:white;
+}
+
+/*                                                    */
+/* global definitions for field labels                */
+/*                                                    */
+
+.a-form label {
+	width:90px; 
+	margin:4px 10px 0 0; 
+	display:-moz-inline-box; /*for mozilla*/
+	display:inline-block; /*for Opera & IE*/
+	text-align:right;
+	vertical-align:top;
+	color:white;
+	font:normal 14px Verdana;
+}
+
+.a-form label span {
+	width:90px; /* must be the same as above!*/
+	display:block; 
+}
+
+/*                                                    */
+/*   FORM FIELDS general formatting                   */
+/*                                                    */
+
+.a-form input,
+.a-form textarea,
+.a-form select { 
+	padding:6px 10px;
+	border: none; 
+	vertical-align:top;
+	color:white;
+	background:url(fancy_dark_inp.gif) no-repeat;
+	font:normal 13px Verdana;
+	height:18px;
+}
+
+.a-form input:hover,
+.a-form textarea:hover,
+.a-form select:hover	{
+}
+
+.a-form input:focus,
+.a-form textarea:focus,
+.a-form select:focus	{ 
+}
+
+.a-form textarea,
+.a-form input {
+	width:215px; 
+}
+.a-form select {
+	padding:4px 10px;
+	height:24px;
+	background:#888888;
+	margin-left:10px;
+	width:210px;
+}
+
+.a-form textarea {
+	height:100px;
+	overflow:auto;
+	padding:10px 6px 10px 10px;
+	width:219px;
+	background:url(fancy_dark_area.gif) no-repeat; 
+}
+
+/*                                                    */
+/*   FORM submit button                               */
+/*                                                    */
+.a-form input.prev,
+.a-form input.next,
+.a-form input.send	{ 
+	width:166px;
+	height:30px;  
+	margin: 0 0 5px 171px;
+	font-size:14px;
+	background:url(fancy_dark_submit.gif) no-repeat; 
+	border:none!important;
+}
+.a-form input.next {
+}
+.a-form input.prev {
+}
+
+/*                                                    */
+/*   FORM FIELDS enhanced error display               */
+/*                                                    */
+span.error {
+	background:#FFDFDF url(li-err-bg-dark.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+	padding:5px 0!important;
+	margin:5px 0!important;
+}
+
+/*                                                    */
+/* change formatting of response msgs here            */
+/*                                                    */
+
+div.success {
+	color:white;
+	display:block;
+	background:#444;
+}
+div.error {
+	display:block;
+	background:#FFDFDF url(li-err-bg.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+}
+div.waiting {
+	background:#F9F9F9;
+	color:#AAAAAA;
+	display:block;
+}
+/*                                                    */
+/*   formatting for invalid user inputs               */
+/*                                                    */
+.a-form .error { 
+	color:#d9888a; 
+}
+
+/*                                                    */
+/* disabled fields [disabled] does not work on IE!    */
+/*                                                    */
+
+[disabled] {
+	color:#dddddd;
+	border-color:#dddddd!important;
+	background:none!important;
+}
+.disabled {
+	border-color:#dddddd!important;
+}
+
+/*                                                    */
+/*  Other: browser hacks                              */
+/*                                                    */
+* html .a-form fieldset {
+	position: relative;
+	margin-top:15px;
+	padding-top:25px; 
+}
+* html .a-form legend { 
+	position:absolute; 
+	top: -10px; 
+	left: 10px; 
+	margin-left:0;
+}
+*+html .a-form fieldset {
+	position: relative;
+	margin-top:15px;
+	padding-top:25px; 
+}
+*+html .a-form legend { 
+	position:absolute; 
+	top: -10px; 
+	left: 10px; 
+	margin-left:0;
+}
+
+* html ol.cf-ol,
+* html ol.cf-ol li{ 
+	display: inline-block;  /*for ie6*/
+}
+
+* html .a-form input,
+* html .a-form textarea{
+	background-attachment:fixed!important; 
+}
+*+html .a-form input,
+*+html .a-form textarea{
+	background-position: 100% 100%;
+	background-repeat: no-repeat;
+}

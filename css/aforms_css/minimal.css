@@ -1,0 +1,185 @@
+.a-form { 
+/* 	margin:10px auto 0 auto;  */
+	width: 510px; 
+}
+
+.a-form fieldset	{ 
+	margin-top:10px; 
+	padding:5px 0 5px 0; 
+	border:none;
+}
+.a-form legend { 
+	margin:0;
+	padding:0; 
+	font:normal 18px Helvetica; 
+	color: #aaa;
+	letter-spacing:3px;
+}
+
+/*                                                    */
+/* global definitions for field labels                */
+/*                                                    */
+
+.a-form label {
+	width:90px; 
+	margin:4px 30px 0 0; 
+	display:-moz-inline-box; /*for mozilla*/
+	display:inline-block; /*for Opera & IE*/
+	text-align:left;
+	vertical-align:top;
+	color: #aaa;
+	font:1.5em Trebuchet MS,sans-serif;
+}
+.a-form label span {
+	width:110px; /* must be the same as above!*/
+	display:block; 
+}
+
+/*                                                    */
+/*   FORM FIELDS general formatting                   */
+/*                                                    */
+
+.a-form input,
+.a-form textarea,
+.a-form select { 
+	padding:3px 3px 3px 3px;
+	border:1px solid #aaa; 
+	font:1.3em Trebuchet MS,sans-serif;
+	color:#222222;
+	background:#dddddd url(../imags/field-bg-top.gif) repeat-x top left;
+	vertical-align:top;
+}
+.a-form input:hover,
+.a-form textarea:hover,
+.a-form select:hover	{
+	border: 1px solid #FFCC00;
+	background:#ffffff url(../images/field-bg-bottom.gif) repeat-x bottom left; 
+}
+
+.a-form input:focus,
+.a-form textarea:focus,
+.a-form select:focus	{ 
+	color:#666;
+	background:#ffffff url(../images/field-bg-bottom.gif) repeat-x bottom left; 
+}
+
+.a-form textarea,
+.a-form input {
+	width:298px; 
+}
+.a-form select {
+	width:306px; /* attempt to have equal length */
+}  
+.a-form textarea {
+	font-family: arial;
+	font-size: 0.9em;
+	overflow:auto;
+}
+
+/*                                                    */
+/*   FORM submit button                               */
+/*                                                    */
+
+p.cf-sb {
+	margin: 0;
+	padding:0pt 3px 0pt 0pt !important;
+	text-align:right;
+}
+.a-form input.prev,
+.a-form input.next,
+.a-form input.send	{ 
+	width:auto;  
+	padding:2px 1em; 
+	margin: 2px 80px 2px 2px ;
+	font-size:1.8em;
+	background:url(../images/button-bg.gif) repeat-x; 
+	border:1px solid #adadad!important;
+	border-left-color:#ececec!important; 
+	border-top-color:#ececec!important;
+}
+.a-form input.next {
+	margin: 0 5px 0 0;
+}
+.a-form input.prev {
+	margin: 0 5px 0 0;
+}
+
+/*                                                    */
+/*   FORM FIELDS enhanced error display               */
+/*                                                    */
+span.cf_li_err {
+	background:#FFDFDF url(li-err-bg.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+	padding:5px 0!important;
+	margin:5px 0!important;
+}
+
+/*                                                    */
+/* change formatting of response msgs here            */
+/*                                                    */
+
+div.success {
+	background:#F9F9F9 none repeat scroll 0%;
+	color:#AAAAAA;
+	display:block;
+}
+div.error {
+	display:block;
+	background:#FFDFDF url(li-err-bg.png) repeat!important;
+	border-color:#DF7D7D;
+	border-style:solid;
+	border-width:1px 0pt;
+}
+div.waiting {
+	background:#F9F9F9;
+	color:#AAAAAA;
+	display:block;
+}
+/*                                                    */
+/*   formatting for invalid user inputs               */
+/*                                                    */
+.a-form .error { 
+	color:red; 
+	border:1px solid #FF0000; 
+}
+
+/*                                                    */
+/* disabled fields [disabled] does not work on IE!    */
+/*                                                    */
+
+[disabled] {
+	color:#dddddd;
+	border-color:#dddddd!important;
+	background:none!important;
+}
+.disabled {
+	border-color:#dddddd!important;
+}
+
+/*                                                    */
+/*  Other: browser hacks                              */
+/*                                                    */
+* html .a-form legend { 
+	position:absolute; 
+	left: -8px; 
+	top:0;
+	margin-left:0;
+}
+*+html .a-form legend { 
+	position:absolute; 
+	left: -8px;
+	top:0;
+	margin-left:0;
+}
+* html .a-form fieldset {
+	position: relative;
+	margin-top:15px;
+	padding-top:25px; 
+}
+*+html .a-form fieldset {
+	position: relative;
+	margin-top:15px;
+	padding-top:25px; 
+}

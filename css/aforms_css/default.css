@@ -1,0 +1,82 @@
+form.a-form {
+	width: 400px;
+}
+form.a-form label {
+	float: left;
+	width: 100px;
+	margin-right: 10px; 
+}
+
+form.a-form div {
+	clear: both;
+	margin-bottom: 10px;
+}
+
+.error {
+	background: #fff;
+	color: #ff0000;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+#content div.success {
+	color: #fff;
+	padding: 20px 20px 20px 0;
+}
+
+form.a-form .captcha input, form.a-form span.error {
+	display: block;
+	padding: 0;
+	margin-left: 110px;
+}
+
+form.a-form .captcha input {
+	float: left;
+}
+form.a-form .captcha a {
+	display: block;
+	margin-bottom: 15px;
+}
+
+form.a-form input.text {
+	width: 200px;
+}
+
+form.a-form textarea {
+	width: 200px;
+	height: 100px;
+}
+
+form.a-form fieldset {
+	border: none;
+}
+
+form.a-form ul, #content ul li {
+	list-style: none;
+	list-style-image: none;
+}
+
+#content form.a-form ul.options {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+#content form.a-form ul.options li {
+	margin: 0;
+	padding: 0;
+}
+
+form.a-form fieldset.submit {
+	clear: both;
+	position: relative;
+	padding-top: 0;
+	padding-bottom: 20px;
+}
+
+form.a-form fieldset.submit .send, form.a-form fieldset.submit .next {
+	left: 110px;
+}
+form.a-form fieldset.submit .prev, form.a-form fieldset.submit .send, form.a-form fieldset.submit .next {
+	position: absolute;
+	bottom: 0;
+}
