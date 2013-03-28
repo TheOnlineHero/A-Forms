@@ -8,6 +8,12 @@ li.shiftable {
 	width: 1200px;
 }
 
+li.shiftable h3 {
+	background: none;
+	display: inline;
+	margin-bottom: 0;
+}
+
 li.shiftable, table tr.shiftable td {
 	cursor: move;
 }
@@ -52,6 +58,10 @@ li.shiftable.odd, table tbody tr.odd td {
 }
 li.shiftable.even, table tbody tr.even td {
 	background: #dfdfdf;
+}
+
+li.shiftable.odd.section-heading, li.shiftable.even.section-heading {
+	background: none;
 }
 
 li.shiftable ul {

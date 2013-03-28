@@ -23,6 +23,7 @@ License: GPL2
 
 require_once("a-form.php");
 require_once("a-form-section.php");
+require_once("a-form-fields.php");
 require_once("a-forms-path.php");
 
 define(__DEFAULT_LIMIT__, "10");
@@ -137,6 +138,15 @@ function aform_css_file_selector() {
   die();  
 }
 
+add_action('wp_ajax_add_field_to_section', 'add_field_to_section');
+function add_field_to_section() {
+  global $wpdb;
+  $section = tom_get_row_by_id("a_form_sections", "*", "ID", $_POST["section_id"]);
+  tom_insert_record("a_form_fields", array("field_order" => $_POST["field_order"], "section_id" => $_POST["section_id"], "form_id" => $section->form_id));
+  echo $section->ID."::".$wpdb->insert_id;
+  die();  
+}
+
 function a_form_initial_page() {
   wp_enqueue_script('jquery');
   wp_enqueue_script('jquery-ui-sortable');
@@ -145,15 +155,20 @@ function a_form_initial_page() {
   wp_enqueue_script("a-forms");
 
   wp_localize_script( 'a-forms', 'AFormsAjax', array(
+    "ajax_url" => admin_url('admin-ajax.php'),
     "base_url" => get_option('siteurl')."/wp-admin/admin.php?page=a-forms/a-forms.php",
     "sort_section_url" => get_option('siteurl')."/wp-admin/admin.php?page=a-forms/a-forms.php&a_form_page=section_section_sort",
-    "sort_field_url" => get_option('siteurl')."/wp-admin/admin.php?page=a-forms/a-forms.php&a_form_page=section_field_sort",
-    "create_field_url" => get_option('siteurl')."/wp-admin/admin.php?page=a-forms/a-forms.php&a_form_page=create_field"
+    "sort_field_url" => get_option('siteurl')."/wp-admin/admin.php?page=a-forms/a-forms.php&a_form_page=section_field_sort"
   ));
-
 
   wp_register_style("a-forms", plugins_url("/css/style.css", __FILE__));
   wp_enqueue_style("a-forms");
+
+  if (tom_get_query_string_value("a_form_page") == "fields") {
+    if ($_GET["action"] == "delete") {
+      AFormFields::delete();
+    }
+  }
 
   if (tom_get_query_string_value("a_form_page") == "section") {
     a_form_section_page();
@@ -161,13 +176,10 @@ function a_form_initial_page() {
     tom_update_record_by_id("a_form_sections", array("section_order" => $_POST["section_order"]), "ID", $_POST["ID"]);
     exit;
   } else if (tom_get_query_string_value("a_form_page") == "section_field_sort") {
-    tom_update_record_by_id("a_form_fields", array("field_order" => $_POST["field_order"]), "FID", $_POST["FID"]);
+    tom_update_record_by_id("a_form_fields", array("field_order" => $_POST["field_order"], "section_id" => $_POST["section_id"]), "FID", $_POST["FID"]);
     exit;
   } else if (tom_get_query_string_value("a_form_page") == "create_field") {
-    $section = tom_get_row_by_id("a_form_sections", "*", "ID", $_POST["section_id"]);
-    tom_insert_record("a_form_fields", array("field_order" => $_POST["field_order"], "section_id" => $_POST["section_id"], "form_id" => $section->form_id));
-    global $wpdb;
-    echo $wpdb->insert_id;
+
     exit;
   } else {
     a_form_page();
@@ -175,16 +187,18 @@ function a_form_initial_page() {
 }
 
 function a_form_page() {
-  if (isset($_POST["action"])) {
-    if ($_POST["action"] == "Update") {
-      AForm::update();
+  if (tom_get_query_string_value("a_form_page") != "section") {
+    if (isset($_POST["action"])) {
+      if ($_POST["action"] == "Update") {
+        AForm::update();
+      }
+      if ($_POST["action"] == "Create") {
+        AForm::create();
+      }
     }
-    if ($_POST["action"] == "Create") {
-      AForm::create();
-    }
-  }
-  if ($_GET["action"] == "delete") {
-    AForm::delete();
+    if ($_GET["action"] == "delete") {
+      AForm::delete();
+    }    
   }
   ?>
   

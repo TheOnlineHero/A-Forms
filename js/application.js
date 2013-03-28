@@ -10,19 +10,19 @@ jQuery(function() {
     });    
   }
 
-  if (jQuery("#sections_sortable tbody").length > 0) {
-    jQuery( "#sections_sortable tbody" ).sortable({
-      update: function( event, ui ) {
-        jQuery("#sections_sortable tbody tr").each(function() {
-          jQuery.ajax({
-            type: 'POST',
-            url: AFormsAjax.sort_section_url,
-            data: {ID: jQuery.trim(jQuery(this).find("td.id").html()), section_order: jQuery(this).index()}
-          });
-        });
-      }
-    });   
-  }
+  // if (jQuery("#sections_sortable tbody").length > 0) {
+  //   jQuery( "#sections_sortable tbody" ).sortable({
+  //     update: function( event, ui ) {
+  //       jQuery("#sections_sortable tbody tr").each(function() {
+  //         jQuery.ajax({
+  //           type: 'POST',
+  //           url: AFormsAjax.sort_section_url,
+  //           data: {ID: jQuery.trim(jQuery(this).find("td.id").html()), section_order: jQuery(this).index()}
+  //         });
+  //       });
+  //     }
+  //   });   
+  // }
 
   jQuery(document).delegate(".delete-option", "click", function() {
     jQuery(this).parent().addClass("deleted");
@@ -66,14 +66,14 @@ jQuery(function() {
 		});
 
 		jQuery.ajax({
-        type: 'POST',
-        url: AFormsAjax.create_field_url,
-        data: {section_id: jQuery("#ID").val(), field_order: jQuery("#fields_sortable > li.shiftable").length}
+        type: "post",
+        url: AFormsAjax.ajax_url,
+        data: {section_id: jQuery("#fields_sortable li.section-heading:last").attr("id").replace("section_id_", ""), field_order: jQuery("#fields_sortable > li.shiftable").length, action: "add_field_to_section"}
     }).success(function(data) {
-      var record_id = data.match(/\d*$/)[0];
-    	jQuery("#fields_sortable li:last").attr("id", record_id);
-      jQuery("#fields_sortable li input[type=hidden]").val(record_id);
-      jQuery(row).find(".delete").attr("href", AFormsAjax.base_url + "&action=delete&a_form_page=section&fid="+record_id+"&section_id="+jQuery("#ID").val());
+      var tmp = data.split("::");
+    	jQuery("#fields_sortable li:last").attr("id", tmp[1]);
+      jQuery("#fields_sortable li input.section_id").val(tmp[0]);
+      jQuery(row).find(".delete").attr("href", AFormsAjax.base_url + "&action=delete&a_form_page=section&fid="+tmp[1]+"&section_id="+tmp[0]);
       sort_fields();
     });
     jQuery("#fields_sortable > li:not(.shiftable)").remove();
@@ -166,6 +166,10 @@ jQuery(function() {
       jQuery(this).html("No");
     }
   });
+
+  jQuery("html,body").animate({
+    scrollTop: (jQuery("span.error, #sections_heading").offset().top - 100)
+  }, 2000);
 });
 
 function make_fields_sortable_odd_and_even_rows() {
@@ -179,11 +183,28 @@ function create_option_value_row(key_value, value_value) {
 }
 
 function sort_fields() {
+  var section_id = 0;
+  var section_sort_order = 0;
+
+  if (!jQuery("#fields_sortable li:first").hasClass("section-heading")) {
+    jQuery("#fields_sortable li.section-heading:first").insertBefore(jQuery("#fields_sortable li:first"));
+    make_fields_sortable_odd_and_even_rows();
+  }
+
   jQuery("#fields_sortable > li.shiftable").each(function() {
+    if (jQuery(this).hasClass("section-heading")) {
+      section_id = jQuery(this).attr("id").replace("section_id_", "");
+      jQuery.ajax({
+        type: 'POST',
+        url: AFormsAjax.sort_section_url,
+        data: {ID: section_id, section_order: section_sort_order}
+      });
+      section_sort_order++;
+    } 
     jQuery.ajax({
       type: 'POST',
       url: AFormsAjax.sort_field_url,
-      data: {FID: jQuery(this).attr("id"), field_order: jQuery(this).index()}
+      data: {FID: jQuery(this).attr("id"), field_order: jQuery(this).index(), section_id: section_id}
     });
   });
 }

@@ -20,16 +20,18 @@ final class AForm {
     } 
     $form_valid = tom_validate_form(AForm::array_validation_rules());
 
-		if ($send_confirmation_email_valid && $form_valid) {
+    $fields_valid = AFormFields::update();
+
+		if ($send_confirmation_email_valid && $form_valid && $fields_valid) {
 
       $valid = tom_update_record_by_id("a_form_forms", 
       tom_get_form_query_strings("a_form_forms", array("created_at", "updated_at"), array("updated_at" => gmdate( 'Y-m-d H:i:s'))), "ID", $_POST["ID"]);
       
-      if ($valid) {
+      if ($valid && $fields_valid) {
         if ($_POST["sub_action"] == "Update") {
-          $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&message=Update Complete&action=edit&id=".$_POST["ID"];
+          $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&message=Update Complete&action=edit&id=".$_POST["ID"]."#sections_heading";
         } else {
-          $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&message=Update Complete";
+          $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&message=Update Complete#sections_heading";
         }
         
         tom_javascript_redirect_to($url, "<p>Please <a href='$url'>Click Next</a> to continue.</p>");
@@ -78,7 +80,7 @@ final class AForm {
           "field_subject_id" => $from_subject_id
         ), "ID", $form_id);
 
-        $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&a_form_page=section&action=edit&id=".$section_id."&message=Record Created";
+        $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&action=edit&id=".$form_id."&message=Record Created#sections_heading";
         tom_javascript_redirect_to($url, "<p>Please <a href='$url'>Click Next</a> to continue.</p>");
         exit;
       }
@@ -90,13 +92,12 @@ final class AForm {
     tom_delete_record_by_id("a_form_forms", "ID", $_GET["id"]);
     tom_delete_record_by_id("a_form_sections", "form_id", $_GET["id"]);
     tom_delete_record_by_id("a_form_fields", "form_id", $_GET["id"]);
-    $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&message=Record Deleted";
+    $url = get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&message=Record Deleted#sections_heading";
     tom_javascript_redirect_to($url, "<p>Please <a href='$url'>Click Next</a> to continue.</p>");
     exit;
 	}
 
 	public static function render_admin_a_form_forms_form($instance, $action) { ?>
-	  <input type="hidden" name="a_form_page" value="form" />
 	  <?php
 		  tom_add_form_field($instance, "hidden", "ID *", "ID", "ID", array(), "span", array("class" => "hidden"));
 		  tom_add_form_field($instance, "text", "Name *", "form_name", "form_name", array("class" => "text"), "p", array());
@@ -128,26 +129,19 @@ final class AForm {
       tom_add_form_field($instance, "textarea", "Successful Message", "success_message", "success_message", array(), "p", array(), array());
       tom_add_form_field($instance, "text", "Successful Redirect URL", "success_redirect_url", "success_redirect_url", array("class" => "text"), "p", array(), array());
       
-      tom_add_form_field($instance, "checkbox", "Tracking", "enable_tracking", "enable_tracking", array(), "p", array(), array("1" => "Enabled"));
+      tom_add_form_field($instance, "checkbox", "Tracking", "tracking_enabled", "tracking_enabled", array(), "p", array(), array("1" => "Enabled"));
 
       tom_add_form_field($instance, "checkbox", "Captcha", "include_captcha", "include_captcha", array(), "p", array(), array("1" => "Include Before Send Button"));
-
 
 	  ?>
     <input type="hidden" name="action" value="<?php echo($action); ?>" />
 	  <p><input type="submit" name="sub_action" value="<?php echo($action); ?>" /> <?php if ($instance != null) { ?><input type="submit" name="sub_action" value="Save and Finish" /><?php } ?></p>
 
 	  <?php if ($action == "Update") { ?>
-	    <h2>Sections <a class="add-new-h2" href="<?php echo(get_option('siteurl')); ?>/wp-admin/admin.php?page=a-forms/a-forms.php&action=new&a_form_page=section&form_id=<?php echo($instance->ID); ?>">Add New</a></h2>
-	    <div id="sections_sortable">
-		  <?php
-
-		    tom_generate_datatable("a_form_sections", array("ID", "section_name"), "ID", "form_id=".$instance->ID, array("section_order ASC"), __DEFAULT_LIMIT__, get_option("siteurl")."/wp-admin/admin.php?page=a-forms/a-forms.php&a_form_page=section", false, true, true, true, true); 
-
-		  }
-	  	echo ("</div>");
+	    <h2 id="sections_heading">Sections <a class="add-new-h2" href="<?php echo(get_option('siteurl')); ?>/wp-admin/admin.php?page=a-forms/a-forms.php&action=new&a_form_page=section&form_id=<?php echo($instance->ID); ?>">Add New</a></h2>
+      <?php AForm::render_admin_a_form_fields_form($instance, $action);
+    }
 	}
-
 
   // Upload file.
   public static function upload_file($field_name, $extensions_allowed) {
@@ -220,6 +214,54 @@ final class AForm {
     }
 
     return $filedest;
+  }
+
+
+  public static function render_admin_a_form_fields_form($instance, $action) { 
+    if ($instance != null) { ?>
+      <h2><?php echo $instance->form_name; ?></h2>
+    <?php } ?>
+    <input type="hidden" name="a_form_page" value="fields" />
+    <?php
+    tom_add_form_field($instance, "hidden", "ID", "ID", "ID", array(), "span", array("class" => "hidden"));
+    ?>
+    <ul id="fields_row_clone">
+      <li class="shiftable">
+        <?php
+          AFormFields::render_admin_a_form_fields_row(null, "-1");
+        ?>
+      </li>
+    </ul>
+    <ul id="fields_sortable">
+      <?php
+        $sections = tom_get_results("a_form_sections", "*", "form_id=".$instance->ID, $order_array = array("section_order ASC"), $limit = "");
+        $index = 0;
+        foreach ($sections as $section) { ?>
+          <li class='shiftable section-heading' id="section_id_<?php echo($section->ID); ?>">
+            <h3><?php echo($section->section_name); ?>
+              <a href="<?php echo(get_option('siteurl')); ?>/wp-admin/admin.php?page=a-forms/a-forms.php&action=edit&a_form_page=section&id=<?php echo($section->ID); ?>">Edit</a>
+            </h3>
+            <a href="<?php echo(get_option('siteurl')); ?>/wp-admin/admin.php?page=a-forms/a-forms.php&action=delete&a_form_page=section&id=<?php echo($section->ID); ?>" class="delete">Delete</a>
+          </li>
+          <?php
+          $fields = tom_get_results("a_form_fields", "*", "section_id=".$section->ID, $order_array = array("field_order ASC"), $limit = "");
+          foreach ($fields as $field) { ?>
+            <li id="<?php echo($field->FID); ?>" class="shiftable">
+              <?php
+                AFormFields::render_admin_a_form_fields_row($field, $index);
+                $index++;
+              ?>
+            </li>
+          <?php }
+        } ?>
+
+    </ul>
+    <?php if ($instance != null) { ?>
+      <p class="actions"><a href='#' id="new_form_row">New Field</a></p>
+    <?php } ?>
+    <input type="hidden" name="action" value="<?php echo($action); ?>" />
+    <p><input type="submit" name="sub_action" value="<?php echo($action); ?>" /> <?php if ($instance != null) { ?><input type="submit" name="sub_action" value="Save and Finish" /><?php } ?></p>
+    <?php
   }
 
 }
